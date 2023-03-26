@@ -1,9 +1,9 @@
-const http = require('http');
-const { App } = require('@slack/bolt');
-const { SocketModeClient } = require('@slack/socket-mode');
-const axios = require('axios');
-const { Configuration, OpenAIApi } = require('openai');
-const random = require('random');
+import http from 'http';
+import { App } from '@slack/bolt';
+import { SocketModeClient } from '@slack/socket-mode';
+import axios from 'axios';
+import { Configuration, OpenAIApi } from 'openai';
+import random from 'random';
 
 // Set up your OpenAI API key
 const configuration = new Configuration({
