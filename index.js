@@ -104,10 +104,8 @@ app.event('app_mention', async ({ body, say, ack }) => {
 
 (async () => {
   // Start the app
-  await client.start();
+  await app.start();
   console.log('App started');
-  client.addApp(app);
-  console.log('App added to SocketModeClient');
 })();
 
 http.createServer(function(req, res) {
