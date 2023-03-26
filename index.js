@@ -38,7 +38,7 @@ async function get_related_gif(query) {
   return null;
 }
 
-app.event('app_mention', async ({ body, say }) => {
+app.event('app_mention', async ({ body, client }) => {
   console.log('--------------------------------------- Received mention event', body.event);
   const text = body.event.text;
   const user = body.event.user;
@@ -57,8 +57,8 @@ app.event('app_mention', async ({ body, say }) => {
 
   if (gif_url) {
     // Send the ChatGPT response with a GIF
-    await say({
-      // channel: body.event.channel,
+    await client.chat.postMessage({
+      channel: body.event.channel,
       blocks: [
         {
           type: 'image',
@@ -90,7 +90,10 @@ app.event('app_mention', async ({ body, say }) => {
       });
       const chatgpt_response = response?.data?.choices[0].message?.content;
       // Send the ChatGPT response without a GIF
-      await say(chatgpt_response);
+      await client.chat.postMessage({
+        channel: body.event.channel,
+        text: chatgpt_response
+      });
     } catch (error) {
       console.error('ERR:', error);
     }
