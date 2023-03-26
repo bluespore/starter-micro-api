@@ -38,7 +38,8 @@ async function get_related_gif(query) {
   return null;
 }
 
-app.event('app_mention', async ({ body, client }) => {
+app.event('app_mention', async ({ body, client, ack }) => {
+  await ack();
   console.log('--------------------------------------- Received mention event', body.event);
   const text = body.event.text;
   const user = body.event.user;
