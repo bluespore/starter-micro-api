@@ -101,6 +101,11 @@ app.event('app_mention', async ({ body, client, ack }) => {
   }
 });
 
+app.error((errorHandler) => {
+  console.error(JSON.stringify(errorHandler));
+  throw new Error(errorHandler.message);
+});
+
 (async () => {
   // Start the app
   await app.start();
