@@ -13,7 +13,7 @@ const openai = new OpenAIApi(configuration);
 
 // Initialize the Slack app
 const app = new App({
-  logLevel: LogLevel.INFO,
+  logLevel: LogLevel.DEBUG,
   token: process.env.SLACK_BOT_TOKEN,
   appToken: process.env.SLACK_APP_TOKEN,
   signingSecret: process.env.SLACK_APP_SIGNING_SECRET,
@@ -39,7 +39,7 @@ async function get_related_gif(query) {
 }
 
 app.event('app_mention', async ({ body, say }) => {
-  console.log('Received mention event', body.event);
+  console.log('--------------------------------------- Received mention event', body.event);
   const text = body.event.text;
   const user = body.event.user;
 
