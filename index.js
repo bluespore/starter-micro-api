@@ -19,7 +19,7 @@ const app = new App({
   signingSecret: process.env.SLACK_APP_SIGNING_SECRET,
   clientId: process.env.SLACK_CLIENT_ID,
   clientSecret: process.env.SLACK_CLIENT_SECRET,
-  scopes: ['app_mentions:read', 'chat:write', 'files:write'],
+  scopes: ['app_mentions:read', 'chat:write', 'chat:write.public', 'files:write'],
   socketMode: true,
 });
 
