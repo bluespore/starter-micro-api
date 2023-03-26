@@ -1,6 +1,6 @@
 import http from 'http';
 import SlackBolt from '@slack/bolt';
-import { SocketModeClient } from '@slack/socket-mode';
+// import { SocketModeClient } from '@slack/socket-mode';
 import axios from 'axios';
 import { Configuration, OpenAIApi } from 'openai';
 import random from 'random';
@@ -19,13 +19,15 @@ const SLACK_APP_TOKEN = process.env.SLACK_APP_TOKEN;
 // Initialize the Slack app
 const app = new App({
   token: SLACK_BOT_TOKEN,
-  signingSecret: process.env.SLACK_APP_SIGNING_SECRET
-});
-
-const client = new SocketModeClient({
+  signingSecret: process.env.SLACK_APP_SIGNING_SECRET,
   appToken: SLACK_APP_TOKEN,
   socketMode: true,
 });
+
+// const client = new SocketModeClient({
+//   appToken: SLACK_APP_TOKEN,
+//   socketMode: true,
+// });
 
 async function get_related_gif(query) {
   const GIPHY_API_KEY = process.env.GIPHY_API_KEY;
@@ -43,13 +45,10 @@ async function get_related_gif(query) {
 }
 
 app.event('app_mention', async ({ body, say, ack }) => {
+  console.log('Received mention event', body.event);
   await ack();
-
   const text = body.event.text;
   const user = body.event.user;
-
-  console.log('Received mention event', body.event);
-
 
   if (!text || !user) {
     return;
