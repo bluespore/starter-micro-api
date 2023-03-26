@@ -13,7 +13,7 @@ const openai = new OpenAIApi(configuration);
 
 // Initialize the Slack app
 const app = new App({
-  logLevel: LogLevel.DEBUG,
+  logLevel: LogLevel.INFO,
   token: process.env.SLACK_BOT_TOKEN,
   appToken: process.env.SLACK_APP_TOKEN,
   signingSecret: process.env.SLACK_APP_SIGNING_SECRET,
