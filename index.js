@@ -19,6 +19,7 @@ const SLACK_APP_TOKEN = process.env.SLACK_APP_TOKEN;
 // Initialize the Slack app
 const app = new App({
   token: SLACK_BOT_TOKEN,
+  signingSecret: process.env.SLACK_APP_SIGNING_SECRET
 });
 
 const client = new SocketModeClient({
