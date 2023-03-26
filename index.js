@@ -1,6 +1,5 @@
 import http from 'http';
 import SlackBolt from '@slack/bolt';
-// import { SocketModeClient } from '@slack/socket-mode';
 import axios from 'axios';
 import { Configuration, OpenAIApi } from 'openai';
 import random from 'random';
@@ -15,19 +14,15 @@ const openai = new OpenAIApi(configuration);
 // Set up your Slack bot token and app token
 const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
 const SLACK_APP_TOKEN = process.env.SLACK_APP_TOKEN;
+const SLACK_APP_SIGNING_SECRET = process.env.SLACK_APP_SIGNING_SECRET
 
 // Initialize the Slack app
 const app = new App({
   token: SLACK_BOT_TOKEN,
-  signingSecret: process.env.SLACK_APP_SIGNING_SECRET,
+  signingSecret: SLACK_APP_SIGNING_SECRET,
   appToken: SLACK_APP_TOKEN,
   socketMode: true,
 });
-
-// const client = new SocketModeClient({
-//   appToken: SLACK_APP_TOKEN,
-//   socketMode: true,
-// });
 
 async function get_related_gif(query) {
   const GIPHY_API_KEY = process.env.GIPHY_API_KEY;
