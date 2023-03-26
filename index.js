@@ -1,9 +1,10 @@
 import http from 'http';
-import { App } from '@slack/bolt';
+import SlackBolt from '@slack/bolt';
 import { SocketModeClient } from '@slack/socket-mode';
 import axios from 'axios';
 import { Configuration, OpenAIApi } from 'openai';
 import random from 'random';
+const { App } = SlackBolt;
 
 // Set up your OpenAI API key
 const configuration = new Configuration({
