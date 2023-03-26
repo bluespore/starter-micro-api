@@ -3,7 +3,7 @@ import SlackBolt from '@slack/bolt';
 import axios from 'axios';
 import { Configuration, OpenAIApi } from 'openai';
 import random from 'random';
-const { App } = SlackBolt;
+const { App, LogLevel } = SlackBolt;
 
 // Set up your OpenAI API key
 const configuration = new Configuration({
@@ -11,14 +11,15 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-// Set up your Slack bot token and app token
-const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
-const SLACK_APP_TOKEN = process.env.SLACK_APP_TOKEN;
-
 // Initialize the Slack app
 const app = new App({
-  token: SLACK_BOT_TOKEN,
-  appToken: SLACK_APP_TOKEN,
+  logLevel: LogLevel.DEBUG,
+  token: process.env.SLACK_BOT_TOKEN,
+  appToken: process.env.SLACK_APP_TOKEN,
+  signingSecret: process.env.SLACK_APP_SIGNING_SECRET,
+  clientId: process.env.SLACK_CLIENT_ID,
+  clientSecret: process.env.SLACK_CLIENT_SECRET,
+  scopes: ['app_mentions:read', 'chat:write', 'files:write'],
   socketMode: true,
 });
 
