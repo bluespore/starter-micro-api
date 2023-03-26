@@ -70,7 +70,7 @@ app.event('app_mention', async ({ body, say }) => {
     });
   } else {
     // Call OpenAI API to get ChatGPT's response
-    let prompt = `Respond to this text "${text}" as if you are an edgy 18-year-old boy who tends to use teenage chat lingo. `
+    let prompt = `Respond to my prompt as if you are an edgy 18-year-old boy who tends to use teenage chat lingo. `
 
     if (random.float() < 0.3) prompt += `Use emojis. `
     if (random.float() < 0.1) prompt += `Be very suggestive with your language. `
@@ -78,6 +78,8 @@ app.event('app_mention', async ({ body, say }) => {
     if (random.float() < 0.1) prompt += `Give a very serious response, and relate it to an incident that happened to you in the past. `
     if (random.float() < 0.1) prompt += `Tell me you'd rather be playing a certain video game instead of having this conversation. `
     if (random.float() < 0.5) prompt += `Respond with 1 or 2 paragraphs. `
+
+    prompt += `Prompt: ${text}`
 
     try {
       const response = await openai.createChatCompletion({
