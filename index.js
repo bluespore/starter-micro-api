@@ -14,12 +14,10 @@ const openai = new OpenAIApi(configuration);
 // Set up your Slack bot token and app token
 const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
 const SLACK_APP_TOKEN = process.env.SLACK_APP_TOKEN;
-const SLACK_APP_SIGNING_SECRET = process.env.SLACK_APP_SIGNING_SECRET
 
 // Initialize the Slack app
 const app = new App({
   token: SLACK_BOT_TOKEN,
-  signingSecret: SLACK_APP_SIGNING_SECRET,
   appToken: SLACK_APP_TOKEN,
   socketMode: true,
 });
@@ -39,9 +37,8 @@ async function get_related_gif(query) {
   return null;
 }
 
-app.event('app_mention', async ({ body, say, ack }) => {
+app.event('app_mention', async ({ body, say }) => {
   console.log('Received mention event', body.event);
-  await ack();
   const text = body.event.text;
   const user = body.event.user;
 
